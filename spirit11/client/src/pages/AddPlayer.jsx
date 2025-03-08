@@ -9,12 +9,12 @@ const AddPlayer = () => {
   const [player, setPlayer] = useState({
     name: "",
     university: "",
-    catogary: "",
+    category: "",
     totalRuns: 0,
     ballsFaced: 0,
     inningsPlayed: 0,
     wickets: 0,
-    oversBalled: 0,
+    oversBowled: 0,
     runsConceded: 0,
   });
 
@@ -30,8 +30,9 @@ const AddPlayer = () => {
     //Backend eka call karanna
     e.preventDefault();
     try {
+    
       const { data } = await axios.post(backendUrl + "/api/player/add-player", {
-        player,
+       player
       });
       if (data.success) {
         toast.success("Player added successfully");
