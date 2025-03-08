@@ -110,7 +110,7 @@ export const addPlayer = async (req, res) => {
       playerValue,
     });
 
-    await player.save();
+    player.save();
     return res.json({ success: true });
   } catch (error) {
     return res.json({ success: false, message: error.message });
