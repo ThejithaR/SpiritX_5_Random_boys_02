@@ -1,10 +1,11 @@
 import { Router } from "express";
 import userAuth from "../middleware/userAuth.js";
-import { getUserData } from "../controllers/userController.js";
+import { getUserData, fetchTeam } from "../controllers/userController.js";
 
 const userRouter = Router();
 
 userRouter.get("/data",userAuth,getUserData)
+userRouter.get("/fetch-team", fetchTeam)
 
 
 export default userRouter;
