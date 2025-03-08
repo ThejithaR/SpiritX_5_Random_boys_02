@@ -14,6 +14,7 @@ import Players from "./pages/Players";
 import Budget from "./pages/Budget";
 import Leaderboard from "./pages/Leaderboard";
 import TournamentSummary from "./pages/TournamentSummary";
+import AddPlayer from "./pages/addPlayer";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/budget" element={<Budget />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/tournament-summary" element={<TournamentSummary />} />
+        <Route path="/add-player" element={<AddPlayer />} />
 
       </Routes>
     </div>
