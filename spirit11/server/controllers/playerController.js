@@ -30,6 +30,13 @@ export const addPlayer = async (req, res) => {
       .json({ success: false, message: "All fields are required" });
   }
 
+  totalRuns = Number(totalRuns);
+  ballsFaced = Number(ballsFaced);
+  inningsPlayed = Number(inningsPlayed);
+  wickets = Number(wickets);
+  oversBowled = Number(oversBowled);
+  runsConceded = Number(runsConceded);
+
   const playerStats = computePlayerStats(
     totalRuns,
     ballsFaced,
@@ -67,12 +74,6 @@ export const addPlayer = async (req, res) => {
     //     playerValue,
     //   });
 
-    totalRuns = Number(totalRuns);
-    ballsFaced = Number(ballsFaced);
-    inningsPlayed = Number(inningsPlayed);
-    wickets = Number(wickets);
-    oversBowled = Number(oversBowled);
-    runsConceded = Number(runsConceded);
 
     console.log({
         name,
