@@ -11,7 +11,7 @@ const playerSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    catogary:{
+    category:{
         type: String,
         required: true,
     },

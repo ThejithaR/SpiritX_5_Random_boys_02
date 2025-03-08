@@ -30,8 +30,8 @@ export const computePlayerStats = ( totalRuns , totalBallsFaced,inningsPlayed,to
     const bowlingStrikeRate = computeBowlingStrikeRate(totalBallsFaced , totalWickets);
     const economyRate = computeEconomyRate(totalBallsBowled , totalRunsConceded);
 
-    const playerPoint = (battingStrikeRate/5) + (battingAverage*0.8) + (500/bowlingStrikeRate) + (140/economyRate);
-    const playerValue = (9*playerPoint + 100) * 1000;
+    const playerPoints = (battingStrikeRate/5) + (battingAverage*0.8) + (500/bowlingStrikeRate) + (140/economyRate);
+    const playerValue = (9*playerPoints + 100) * 1000;
 
-    return { battingStrikeRate , battingAverage , bowlingStrikeRate , economyRate , playerPoint , playerValue};
+    return { battingStrikeRate , battingAverage , bowlingStrikeRate , economyRate , playerPoints , playerValue};
 }

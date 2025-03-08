@@ -5,18 +5,18 @@ export const addPlayer = async (req,res) => {
     const {
         name,
         university,
-        catogary,
+        category,
         totalRuns,
         ballsFaced,
         inningsPlayed,
         wickets,
         oversBalled,
         runsConceded,
-    } = req.body;
+    } = req.body.player;
     //totalWickets,totalBallsBowled,totalRunsConceded
     //battingStrikeRate , battingAverage , bowlingStrikeRate , economyRate , playerPoint , playerValue
 
-    if(!name || !university || !catogary || !totalRuns || !ballsFaced || !inningsPlayed || !wickets || !oversBalled || !runsConceded ){
+    if(!name || !university || !category || !totalRuns || !ballsFaced || !inningsPlayed || !wickets || !oversBalled || !runsConceded ){
         return res.status(400).json({success:false,message:"All fields are required"});
     }
 
@@ -34,6 +34,25 @@ export const addPlayer = async (req,res) => {
     
 
     try {
+
+        console.log({
+            name,
+            university,
+            category,
+            totalRuns,
+            ballsFaced,
+            inningsPlayed,
+            wickets,
+            oversBalled,
+            runsConceded,
+            battingStrikeRate,
+            battingAverage,
+            bowlingStrikeRate,
+            economyRate,
+            playerPoints,
+            playerValue,
+        });
+
         const player = new playerModel({
             name,
             university,
@@ -56,7 +75,8 @@ export const addPlayer = async (req,res) => {
         return res.json({success:true});
 
     } catch (error) {
-        return res.json({success:false,message:err.message})
+        console.log(error);
+        return res.json({success:false,message:"methana thama error eka"}); 
     }
 
 }
