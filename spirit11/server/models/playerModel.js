@@ -16,27 +16,27 @@ const playerSchema = new mongoose.Schema({
     required: true,
   },
   totalRuns: {
-    type: String,
+    type: Number,
     required: true,
   },
   ballsFaced: {
-    type: String,
+    type: Number,
     required: true,
   },
   inningsPlayed: {
-    type: String,
+    type: Number,
     required: true,
   },
   wickets: {
-    type: String,
+    type: Number,
     required: true,
   },
   oversBowled: {
-    type: String,
+    type: Number,
     required: true,
   },
   runsConceded: {
-    type: String,
+    type: Number,
     required: true,
   },
   // methana edit kranna thiyei

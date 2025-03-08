@@ -2,7 +2,7 @@ import playerModel from "../models/playerModel.js";
 import { computePlayerStats } from "../services/playerServices.js";
 
 export const addPlayer = async (req, res) => {
-  const {
+  let {
     name,
     university,
     category,
@@ -49,7 +49,32 @@ export const addPlayer = async (req, res) => {
   } = playerStats;
 
     try {
-      console.log({
+    //   console.log({
+    //     name,
+    //     university,
+    //     category,
+    //     totalRuns,
+    //     ballsFaced,
+    //     inningsPlayed,
+    //     wickets,
+    //     oversBowled,
+    //     runsConceded,
+    //     battingStrikeRate,
+    //     battingAverage,
+    //     bowlingStrikeRate,
+    //     economyRate,
+    //     playerPoints,
+    //     playerValue,
+    //   });
+
+    totalRuns = Number(totalRuns);
+    ballsFaced = Number(ballsFaced);
+    inningsPlayed = Number(inningsPlayed);
+    wickets = Number(wickets);
+    oversBowled = Number(oversBowled);
+    runsConceded = Number(runsConceded);
+
+    console.log({
         name,
         university,
         category,
@@ -66,6 +91,7 @@ export const addPlayer = async (req, res) => {
         playerPoints,
         playerValue,
       });
+
     const player = new playerModel({
       name,
       university,
