@@ -5,7 +5,7 @@ const connectDB = async ()=>{
     mongoose.connection.on('connected',()=>{ 
         console.log('Database connected')
     })
-    await mongoose.connect(`${process.env.MONGODB_URI}/SecureConnect`)
+    await mongoose.connect(`${process.env.MONGODB_URI}/Spirit11`)
 };
 
 export default connectDB;
