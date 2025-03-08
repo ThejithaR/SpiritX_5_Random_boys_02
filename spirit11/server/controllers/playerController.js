@@ -48,24 +48,7 @@ export const addPlayer = async (req, res) => {
     playerValue,
   } = playerStats;
 
-    try {
-      console.log({
-        name,
-        university,
-        category,
-        totalRuns,
-        ballsFaced,
-        inningsPlayed,
-        wickets,
-        oversBowled,
-        runsConceded,
-        battingStrikeRate,
-        battingAverage,
-        bowlingStrikeRate,
-        economyRate,
-        playerPoints,
-        playerValue,
-      });
+  try {
     const player = new playerModel({
       name,
       university,
@@ -84,7 +67,7 @@ export const addPlayer = async (req, res) => {
       playerValue,
     });
 
-    await player.save();
+    player.save();
     return res.json({ success: true });
   } catch (error) {
     return res.json({ success: false, message: error.message });
