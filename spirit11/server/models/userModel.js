@@ -19,7 +19,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
+  role:{
+    type: String,
+    default: "user",
+  },
+  budget:{
+    type: Number,
+    default: 9000000,
+  },
   verifyOtp: {
     type: String,
     default: "",
