@@ -11,11 +11,11 @@ const computeBattingAverage = (totalRuns , inningsPlayed) => {
     }
     return (totalRuns / inningsPlayed);
 }
-const computeBowlingStrikeRate = (totalBallsFaced , totalWickets) => {
+const computeBowlingStrikeRate = (totalBallsBowled , totalWickets) => {
     if(totalWickets === 0){
         return 0;
     }
-    return (totalBallsFaced / totalWickets);
+    return (totalBallsBowled / totalWickets);
 }
 const computeEconomyRate = (totalBallsBowled , totalRunsConceded) => {
     if(totalBallsBowled === 0){
@@ -24,10 +24,11 @@ const computeEconomyRate = (totalBallsBowled , totalRunsConceded) => {
     return (totalRunsConceded / totalBallsBowled) * 6;
 }
 
-export const computePlayerStats = ( totalRuns , totalBallsFaced,inningsPlayed,totalWickets,totalBallsBowled,totalRunsConceded) => {
+export const computePlayerStats = ( totalRuns , totalBallsFaced,inningsPlayed,totalWickets,oversBowled,totalRunsConceded) => {
     const battingStrikeRate = computeBattingStrikeRate(totalRuns , totalBallsFaced);
     const battingAverage = computeBattingAverage(totalRuns , inningsPlayed);
-    const bowlingStrikeRate = computeBowlingStrikeRate(totalBallsFaced , totalWickets);
+    const totalBallsBowled = oversBowled * 6;
+    const bowlingStrikeRate = computeBowlingStrikeRate(totalBallsBowled , totalWickets);
     const economyRate = computeEconomyRate(totalBallsBowled , totalRunsConceded);
 
     const playerPoints = (battingStrikeRate/5) + (battingAverage*0.8) + (500/bowlingStrikeRate) + (140/economyRate);
