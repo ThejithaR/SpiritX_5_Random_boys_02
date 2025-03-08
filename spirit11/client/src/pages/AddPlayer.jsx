@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { AppContext } from "../context/AppContext";
 
 const AddPlayer = () => {
+  const {backendUrl} = useContext(AppContext);  
+
   const [player, setPlayer] = useState({
     name: "",
     university: "",
