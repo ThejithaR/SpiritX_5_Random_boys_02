@@ -74,7 +74,6 @@ export const addPlayer = async (req, res) => {
     //     playerValue,
     //   });
 
-
     console.log({
       name,
       university,
@@ -122,7 +121,7 @@ export const getPlayers = async (req, res) => {
   try {
     // Fetch players, selecting only the 'username' and 'points' fields
     const players = await playerModel.find({}, "name playerPoints"); // Second argument specifies the fields to return
-
+    console.log(players);
     // Return the players' data as JSON
     res.json({ success: true, players });
   } catch (error) {

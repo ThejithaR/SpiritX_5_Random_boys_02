@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/AppContext";
-
+import NavBar from "../components/Navbar";
 const Leaderboard = () => {
   const [filter, setFilter] = useState(5);
   const [playersData, setPlayersData] = useState([]);
@@ -31,7 +31,8 @@ const Leaderboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white p-5">
-      <h1 className="text-3xl font-bold mb-4">Leaderboard</h1>
+      <NavBar />
+      <h1 className="text-3xl font-bold mb-4 mt-30">Leaderboard</h1>
       <div className="mb-4">
         <label className="mr-2">Show top:</label>
         <input

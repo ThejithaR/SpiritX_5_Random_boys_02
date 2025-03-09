@@ -4,13 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const { userData, backendUrl, setUserData, setIsLoggedin } =
+  const location = useLocation();
+  const { userData, backendUrl, setUserData, setIsLoggedin, isLoggedin } =
     useContext(AppContext);
-
-  console.log(userData)
+  const isHomePage = location.pathname === "/";
   const sendVerificationOtp = async () => {
     try {
       axios.defaults.withCredentials = true;
@@ -33,19 +34,55 @@ const NavBar = () => {
   const logout = async () => {
     try {
       axios.defaults.withCredentials = true;
-      const {data} = await axios.post(backendUrl + "/api/auth/logout");
+      const { data } = await axios.post(backendUrl + "/api/auth/logout");
       data.success && setIsLoggedin(false);
       data.success && setUserData(false);
       navigate("/");
-
     } catch (error) {
       toast.error(error.message);
+    }
+  };
+  const handleClick = () => {
+    if (userData.role === "admin" && isLoggedin) {
+      navigate("/dashboard");
+    } else if (userData.role === "user" && isLoggedin) {
+      navigate("/players");
+    } else {
+      navigate("/");
     }
   };
 
   return (
     <div className="w-full flex justify-between items-center p-4 sm:p-6 sm:px-24 absolute top-0">
-      <img src={assets.logo} alt="" className="w-60 sm:w-60 h-auto" />
+      <img
+        src={assets.logo}
+        alt=""
+        className="w-15 sm:w-15 h-auto rounded-full"
+        onClick={handleClick}
+      />
+      {/* Navbar Links */}
+      {userData.role === "user" &&  !isHomePage && (
+        <div className="hidden sm:flex gap-6 items-center justify-center">
+          <a href="/" className="text-gray-800 hover:text-blue-500">
+            Home
+          </a>
+          <a href="/players" className="text-gray-800 hover:text-blue-500">
+            Players
+          </a>
+          <a href="/teamselection" className="text-gray-800 hover:text-blue-500">
+            TeamSelection
+          </a>
+          <a href="/budget" className="text-gray-800 hover:text-blue-500">
+            Budget
+          </a>
+          <a href="/leaderboard" className="text-gray-800 hover:text-blue-500">
+            Leaderboard
+          </a>
+          <a href="/Spiriter" className="text-gray-800 hover:text-blue-500">
+            Spiriter
+          </a>
+        </div>
+      )}
       {userData ? (
         <div className="w-8 h-8 flex justify-center items-center rounded-full bg-black text-white relative group">
           {userData.username[0].toUpperCase()}
