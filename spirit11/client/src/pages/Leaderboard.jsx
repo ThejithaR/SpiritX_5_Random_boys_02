@@ -16,8 +16,11 @@ const Leaderboard = () => {
           backendUrl + "/api/player/get-players"
         );
         if (data.success) {
-          console.log(data.users)
-          setPlayersData(data.users);
+          const sortedPlayers = data.users.sort(
+            (a, b) => b.teamPoints - a.teamPoints
+          );
+
+          setPlayersData(sortedPlayers);
         } else {
           toast.error(data.message);
           ``;
@@ -39,7 +42,7 @@ const Leaderboard = () => {
         <input
           type="number"
           min="1"
-          //max={playersData.length} 
+          //max={playersData.length}
           value={filter}
           onChange={(e) => setFilter(Number(e.target.value))} // Update filter state on input change
           className="p-1 text-black rounded border border-gray-700 w-10"
