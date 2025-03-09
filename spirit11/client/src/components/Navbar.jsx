@@ -61,7 +61,7 @@ const NavBar = () => {
         onClick={handleClick}
       />
       {/* Navbar Links */}
-      {userData.role === "user" &&  !isHomePage && (
+      {userData.role === "user" && !isHomePage && (
         <div className="hidden sm:flex gap-6 items-center justify-center">
           <a href="/" className="text-gray-800 hover:text-blue-500">
             Home
@@ -69,7 +69,10 @@ const NavBar = () => {
           <a href="/players" className="text-gray-800 hover:text-blue-500">
             Players
           </a>
-          <a href="/teamselection" className="text-gray-800 hover:text-blue-500">
+          <a
+            href="/teamandselection"
+            className="text-gray-800 hover:text-blue-500"
+          >
             TeamSelection
           </a>
           <a href="/budget" className="text-gray-800 hover:text-blue-500">

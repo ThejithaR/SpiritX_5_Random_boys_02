@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/AppContext";
-import NavBar from "../components/Navbar";
+import NavBar from "../components/NavBar";
 const Leaderboard = () => {
   const [filter, setFilter] = useState(5);
   const [playersData, setPlayersData] = useState([]);
