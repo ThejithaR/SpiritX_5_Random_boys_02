@@ -122,7 +122,7 @@ const TeamAndSelection = () => {
             setView("team");
             window.location.reload();
           }}
-          className={`px-6 py-2 font-semibold rounded-md transition ${
+          className={`px-6 py-2 font-semibold rounded-full transition ${
             view === "team"
               ? "bg-blue-600 text-white"
               : "bg-gray-500 hover:bg-gray-400"
