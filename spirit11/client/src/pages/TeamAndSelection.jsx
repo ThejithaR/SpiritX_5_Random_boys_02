@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import PlayerCardForMyTeam from "../components/PlayerCardForBudget";
 import axios from "axios";
-
+import NavBar from "../components/NavBar";
 const TeamAndSelection = () => {
   const { backendUrl } = useContext(AppContext);
   const [view, setView] = useState("selection"); // "selection" or "team"
@@ -59,7 +59,8 @@ const TeamAndSelection = () => {
 
   return (
     <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">
-      <h1 className="text-3xl font-bold text-center mb-6">🏏 Player Selection & My Team</h1>
+      <NavBar />
+      <h1 className="text-3xl font-bold text-center mb-6 mt-30">🏏 Player Selection & My Team</h1>
 
       {/* Tabs for Navigation */}
       <div className="flex justify-center space-x-4 mb-6">
