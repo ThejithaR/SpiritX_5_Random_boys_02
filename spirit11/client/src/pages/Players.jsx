@@ -18,7 +18,6 @@ const Players = () => {
       const { data } = await axios.get(backendUrl + "/api/player/fetch-players");
 
       if (data.success) {
-        toast.success("Players fetched successfully");
         setPlayers(data.players);
       } else {
         toast.error("Player fetching failed");
