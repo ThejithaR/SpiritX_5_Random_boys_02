@@ -73,8 +73,10 @@ Spirit11 is an exciting fantasy cricket league developed for the *Inter-Universi
    install flask and cors
    pip install flask
    pip install flask-cors
-   then run python app.py in the terminal
+   python app.py
    ```
+
+   Gemini Key  and connection string is in the backend
 
 4. Install Flask dependencies for the chatbot:
 
