@@ -57,7 +57,7 @@ const NavBar = () => {
       <img
         src={assets.logo}
         alt=""
-        className="w-15 sm:w-15 h-auto rounded-full"
+        className="w-15 sm:w-15 h-16 rounded-full"
         onClick={handleClick}
       />
       {/* Navbar Links */}

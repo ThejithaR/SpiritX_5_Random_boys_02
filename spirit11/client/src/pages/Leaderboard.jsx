@@ -32,7 +32,7 @@ const Leaderboard = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white p-5">
       <NavBar />
-      <h1 className="text-3xl font-bold mb-4 mt-30">Leaderboard</h1>
+      <h1 className="text-4xl font-bold mb-4 mt-30">Leaderboard</h1>
       <div className="mb-4">
         <label className="mr-2">Show top:</label>
         <input
@@ -41,7 +41,7 @@ const Leaderboard = () => {
           //max={playersData.length} 
           value={filter}
           onChange={(e) => setFilter(Number(e.target.value))} // Update filter state on input change
-          className="p-1 text-black rounded"
+          className="p-1 text-black rounded border border-gray-700 w-10"
         />
       </div>
       <div className="w-full max-w-4xl">
