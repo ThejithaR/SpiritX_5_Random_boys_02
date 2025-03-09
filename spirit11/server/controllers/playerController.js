@@ -163,3 +163,17 @@ export const getPlayerById = async (req, res) => {
     res.status(500).send("Error querying players");
   }
 };
+
+export const deleteByID = async (req,res) =>{
+  console.log("came here")
+  try{
+      const {id} = req.body;
+      const player = await playerModel.findByIdAndDelete(id);
+      if(!player){
+          return res.json({success:false,message:"Player not found"});
+      }
+      return res.json({success:true,message:"Player deleted successfully"});
+  }catch(err){
+      return res.json({success:false,message:err.message});
+  }
+}

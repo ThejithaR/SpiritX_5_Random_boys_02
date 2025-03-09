@@ -8,8 +8,11 @@ import { AppContext } from "../context/AppContext";
 const PlayerCard = ({ player, refreshPlayers }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const {role} = useContext(AppContext);
-  console.log(role)
+
+  const {userData,backendUrl} = useContext(AppContext);
+
+  const role = userData.role;
+  console.log(role);
   const openModal = () => {
     setIsModalOpen(true);
     document.body.style.overflow = "hidden"; 
@@ -28,7 +31,9 @@ const PlayerCard = ({ player, refreshPlayers }) => {
     setIsDeleting(true);
 
     try {
-      const { data } = await axios.delete(`http://localhost:5000/api/player/delete/${player._id}`);
+      const { data } = await axios.delete(backendUrl+"/api/player/delete",{
+        data: { id: player._id }
+      })
 
       if (data.success) {
         toast.success("Player deleted successfully");
@@ -70,7 +75,7 @@ const PlayerCard = ({ player, refreshPlayers }) => {
             <div className="mt-6 flex justify-center gap-4">
               <button
                 onClick={openModal}
-                className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+                className=" cursor-pointer px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
               >
                 View Profile
               </button>
