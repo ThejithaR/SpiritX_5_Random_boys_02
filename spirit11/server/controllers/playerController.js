@@ -1,9 +1,5 @@
 import playerModel from "../models/playerModel.js";
-import userModel from "../models/userModel.js";
-import {
-  computePlayerStats,
-  calPlayerPoints,
-} from "../services/playerServices.js";
+import { computePlayerStats } from "../services/playerServices.js";
 
 export const addPlayer = async (req, res) => {
   let {
@@ -121,7 +117,6 @@ export const addPlayer = async (req, res) => {
   }
 };
 
-
 export const fetchPlayers = async (req, res) => {
   
   try {
@@ -152,5 +147,19 @@ export const getPlayers = async (req, res) => {
   } catch (error) {
     console.error("Error fetching players:", error);
     res.status(500).send("Error querying players");
-  }
+}
 };
+
+export const searchPlayers = async (req, res) => {
+  try {
+    const { searchTerm } = req.body;
+    const players = await playerModel.find(
+      { name: { $regex: searchTerm, $options: "i" } },
+      "name university category playerValue"
+    );
+    res.json({ success: true, players });
+  } catch (error) {
+    console.error("Error searching players:", error);
+    res.status(500).send("Error searching players");
+  }
+}

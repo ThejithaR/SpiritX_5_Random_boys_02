@@ -7,5 +7,6 @@ const playerRouter = Router();
 playerRouter.post('/add-player', addPlayer)
 playerRouter.get('/get-players', getPlayers)
 playerRouter.get('/fetch-players',fetchPlayers)
+playerRouter.post('/searchPlayers', )
 
 export default playerRouter;

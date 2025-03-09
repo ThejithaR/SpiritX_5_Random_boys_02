@@ -58,9 +58,11 @@ const TeamAndSelection = () => {
     }
   };
 
+  
+
   return (
     <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">
-      <h1 className="text-3xl font-bold text-center mb-6">🏏 Player Selection & My Team</h1>
+      <h1 className="text-6xl font-bold text-center mb-6">🏏 Player Selection</h1>
 
       {/* Slider */}
       <div className="flex justify-center mb-4">
@@ -82,7 +84,7 @@ const TeamAndSelection = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <div>
+          {/* <div>
             {players.filter(player => player.name.toLowerCase().includes(searchTerm.toLowerCase())).map(player => (
               <div key={player._id} className="mb-2">
                 <PlayerCardForBudget {...player} />
@@ -93,7 +95,7 @@ const TeamAndSelection = () => {
                 </button>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* My Team View */}
