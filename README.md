@@ -69,22 +69,12 @@ Spirit11 is an exciting fantasy cricket league developed for the *Inter-Universi
    5.*Chatbot Setup:*
 
    ```bash
-   cd chatbot
-   python -m venv env
-   source env/bin/activate  # Windows: env\Scripts\activate
-   pip install -r requirements.txt
+   cd spirit11\flask-server
+   install flask and cors
+   pip install flask
+   pip install flask-cors
+   then run python app.py in the terminal
    ```
-
-   
-
-   5. Start the Flask server:
-
-   ```bash
-   bash
-   flask run
-   ```
-
-   
 
 4. Install Flask dependencies for the chatbot:
 
