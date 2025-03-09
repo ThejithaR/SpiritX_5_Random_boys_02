@@ -122,7 +122,7 @@ export const getPlayers = async (req, res) => {
     );
     await Promise.all(
       users.map(async (user) => {
-        user.teamPoints = await calPlayerPoints(user.team); // Await the calculation of team points
+        user.teamPoints = await calPlayerPoints(user.team);
       })
     );
     console.log(users);
@@ -134,19 +134,57 @@ export const getPlayers = async (req, res) => {
 
 };
 
+// export const searchPlayers = async (req, res) => {
+//   try {
+//     const searchTerm = req.body.searchTerm;
+//     console.log(searchTerm);
+//     //console.log(req);
+//     if (!searchTerm) {
+//       return res.status(400).json({ success: false, message: "Search term is required" });
+//     } 
+//     const players = await playerModel.find(
+//       { name: { $regex: searchTerm, $options: "i" } },
+//       "name university category playerValue"
+//     );
+//     res.json({ success: true, players });
+//   } catch (error) {
+//     //console.log(error);
+//     console.error("Error searching players:", error);
+//     res.status(500).send("Error searching players");
+//   }
+// }
+
 export const searchPlayers = async (req, res) => {
   try {
-    const { searchTerm } = req.body;
+    const searchTerm = req.body.searchTerm;
+    console.log("Search Term:", searchTerm);
+
+    if (!searchTerm) {
+      return res.status(400).json({ success: false, message: "Search term is required" });
+    }
+
     const players = await playerModel.find(
-      { name: { $regex: searchTerm, $options: "i" } },
+      {
+        $expr: {
+          $regexMatch: {
+            input: { $concat: ["$name", " ", "$university", " ", "$category"] },
+            regex: searchTerm,
+            options: "i"
+          }
+        }
+      },
       "name university category playerValue"
     );
+
     res.json({ success: true, players });
   } catch (error) {
     console.error("Error searching players:", error);
     res.status(500).send("Error searching players");
   }
-}
+};
+
+
+
 export const getPlayerById = async (req, res) => {
   try {
     const { id } = req.params;
