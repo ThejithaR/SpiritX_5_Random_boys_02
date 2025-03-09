@@ -147,3 +147,19 @@ export const searchPlayers = async (req, res) => {
     res.status(500).send("Error searching players");
   }
 }
+export const getPlayerById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const player = await playerModel.findById(id);
+    if (!player) {
+      return res.status(404).json({ success: false, message: "Player not found" });
+    }
+
+    return res.json({ success: true, player });
+
+  } catch (error) {
+    console.error("Error fetching players:", error);
+    res.status(500).send("Error querying players");
+  }
+};
