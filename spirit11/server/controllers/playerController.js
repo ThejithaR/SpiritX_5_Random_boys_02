@@ -1,5 +1,9 @@
 import playerModel from "../models/playerModel.js";
-import { computePlayerStats } from "../services/playerServices.js";
+import userModel from "../models/userModel.js";
+import {
+  computePlayerStats,
+  calPlayerPoints,
+} from "../services/playerServices.js";
 
 export const addPlayer = async (req, res) => {
   let {
@@ -55,7 +59,7 @@ export const addPlayer = async (req, res) => {
     playerValue,
   } = playerStats;
 
-    try {
+  try {
     //   console.log({
     //     name,
     //     university,
@@ -74,24 +78,23 @@ export const addPlayer = async (req, res) => {
     //     playerValue,
     //   });
 
-
     console.log({
-        name,
-        university,
-        category,
-        totalRuns,
-        ballsFaced,
-        inningsPlayed,
-        wickets,
-        oversBowled,
-        runsConceded,
-        battingStrikeRate,
-        battingAverage,
-        bowlingStrikeRate,
-        economyRate,
-        playerPoints,
-        playerValue,
-      });
+      name,
+      university,
+      category,
+      totalRuns,
+      ballsFaced,
+      inningsPlayed,
+      wickets,
+      oversBowled,
+      runsConceded,
+      battingStrikeRate,
+      battingAverage,
+      bowlingStrikeRate,
+      economyRate,
+      playerPoints,
+      playerValue,
+    });
 
     const player = new playerModel({
       name,
@@ -119,7 +122,7 @@ export const addPlayer = async (req, res) => {
 };
 
 
-export const getPlayers = async (req, res) => {
+export const fetchPlayers = async (req, res) => {
   
   try {
       const players = await playerModel.find();
@@ -130,5 +133,24 @@ export const getPlayers = async (req, res) => {
       return res.json({ success: true, message: "Players fetched successfully", players:players });
   } catch (error) {
       return res.status(500).json({ success: false, message: "Server error", error: error.message});
+
+}};
+
+export const getPlayers = async (req, res) => {
+  try {
+    const users = await userModel.find(
+      {},
+      "username playerPoints team teamPoints"
+    );
+    await Promise.all(
+      users.map(async (user) => {
+        user.teamPoints = await calPlayerPoints(user.team); // Await the calculation of team points
+      })
+    );
+    console.log(users);
+    res.json({ success: true, users });
+  } catch (error) {
+    console.error("Error fetching players:", error);
+    res.status(500).send("Error querying players");
   }
 };
