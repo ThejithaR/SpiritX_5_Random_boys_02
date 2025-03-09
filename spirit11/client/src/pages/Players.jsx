@@ -14,7 +14,7 @@ const Players = () => {
 
   const fetchPlayers = async () => {
     try {
-      const { data } = await axios.get(backendUrl + "/api/player/get-players");
+      const { data } = await axios.get(backendUrl + "/api/player/fetch-players");
 
       if (data.success) {
         toast.success("Players fetched successfully");
