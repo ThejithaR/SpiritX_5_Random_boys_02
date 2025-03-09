@@ -3,24 +3,29 @@ import { AppContext } from "../context/AppContext";
 import {toast} from "react-toastify";
 import PlayerCard from "../components/PlayerCardForBudget";
 import axios from "axios";
+//import { set } from "mongoose";
 
 const Budget = () => {
   const {backendUrl,isLoggedin , userData, getUserData} = useContext(AppContext)
-  const [budget, setBudget] = useState(500000); // Example budget
-  const [players, setPlayers] = useState([]);
+  const [budget, setBudget] = useState(0); // Example budget
+  let [players, setPlayers] = useState([]);
   const [totalValue, setTotalValue] = useState(0);
 
   useEffect(() => {
-    // Placeholder for API call to fetch user-owned players
+
     const fetchPlayers = async () => {
       try {
-        const response = await axios.post(backendUrl + "/api/user/fetch-team", ); // Replace with actual API URL
-        const fetchedPlayers = response.data;
-
+        const response = await axios.get(backendUrl + "/api/user/fetch-team");
+        const fetchedData = response.data;
+        console.log("Response:", response.data);
+        console.log("Fetched players:", fetchedData);
+        const fetchedPlayers = fetchedData.players;
         setPlayers(fetchedPlayers);
+        console.log("Players:",players);
+        setBudget(response.data.budget);
 
         // Calculate total value of owned players
-        const total = fetchedPlayers.reduce((sum, player) => sum + player.value, 0);
+        const total = fetchedPlayers.reduce((sum, player) => sum + player.playerValue, 0);
         setTotalValue(total);
       } catch (error) {
         console.error("Error fetching players:", error);
@@ -29,6 +34,8 @@ const Budget = () => {
 
     fetchPlayers();
   }, []);
+
+
 
   return (
     <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">
