@@ -10,7 +10,7 @@ const Header = () => {
   const handleClick = () => {
     if(!isLoggedin) navigate("/login");
     else if (userData.role === "admin" && isLoggedin) navigate("/dashboard");
-    else navigate("/leaderboard");
+    else navigate("/teamandselection");
   }
   return (
     <div className="flex flex-col items-center mt-20 px-4 text-center text-gray-800 bg-gr">

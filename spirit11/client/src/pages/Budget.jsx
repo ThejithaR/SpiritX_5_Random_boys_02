@@ -3,6 +3,7 @@ import { AppContext } from "../context/AppContext";
 import {toast} from "react-toastify";
 import PlayerCard from "../components/PlayerCardForBudget";
 import axios from "axios";
+import NavBar from "../components/NavBar";
 //import { set } from "mongoose";
 
 const Budget = () => {
@@ -39,8 +40,9 @@ const Budget = () => {
 
   return (
     <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">
+      <NavBar />
       {/* Heading */}
-      <h1 className="text-3xl font-bold text-center mb-6">🏏 Budget Overview</h1>
+      <h1 className="text-3xl font-bold text-center mb-6 mt-30">🏏 Budget Overview</h1>
 
       {/* Budget Balance */}
       <div className="text-center text-green-400 text-2xl font-semibold bg-green-900 p-3 rounded-lg w-fit mx-auto shadow-md">

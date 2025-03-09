@@ -1,5 +1,6 @@
 import playerModel from "../models/playerModel.js";
-import { computePlayerStats } from "../services/playerServices.js";
+import userModel from "../models/userModel.js";
+import { computePlayerStats, calPlayerPoints } from "../services/playerServices.js";
 
 export const addPlayer = async (req, res) => {
   let {
@@ -56,24 +57,6 @@ export const addPlayer = async (req, res) => {
   } = playerStats;
 
   try {
-    //   console.log({
-    //     name,
-    //     university,
-    //     category,
-    //     totalRuns,
-    //     ballsFaced,
-    //     inningsPlayed,
-    //     wickets,
-    //     oversBowled,
-    //     runsConceded,
-    //     battingStrikeRate,
-    //     battingAverage,
-    //     bowlingStrikeRate,
-    //     economyRate,
-    //     playerPoints,
-    //     playerValue,
-    //   });
-
     console.log({
       name,
       university,
@@ -117,15 +100,118 @@ export const addPlayer = async (req, res) => {
   }
 };
 
+export const fetchPlayers = async (req, res) => {
+  
+  try {
+      const players = await playerModel.find();
+      console.log("Fetched players:", players);
+      if (!players || players.length === 0) {
+          return res.status(404).json({ success: false, message: "No players found"});
+      }
+      return res.json({ success: true, message: "Players fetched successfully", players:players });
+  } catch (error) {
+      return res.status(500).json({ success: false, message: "Server error", error: error.message});
+
+}};
+
 export const getPlayers = async (req, res) => {
   try {
-    // Fetch players, selecting only the 'username' and 'points' fields
-    const players = await playerModel.find({}, "name playerPoints"); // Second argument specifies the fields to return
-    console.log(players);
-    // Return the players' data as JSON
+    const users = await userModel.find(
+      {role : "user"},
+      "username playerPoints team teamPoints"
+    );
+    await Promise.all(
+      users.map(async (user) => {
+        user.teamPoints = await calPlayerPoints(user.team);
+      })
+    );
+    console.log(users);
+    res.json({ success: true, users });
+  } catch (error) {
+    console.error("Error fetching players:", error);
+    res.status(500).send("Error querying players");
+}
+
+};
+
+// export const searchPlayers = async (req, res) => {
+//   try {
+//     const searchTerm = req.body.searchTerm;
+//     console.log(searchTerm);
+//     //console.log(req);
+//     if (!searchTerm) {
+//       return res.status(400).json({ success: false, message: "Search term is required" });
+//     } 
+//     const players = await playerModel.find(
+//       { name: { $regex: searchTerm, $options: "i" } },
+//       "name university category playerValue"
+//     );
+//     res.json({ success: true, players });
+//   } catch (error) {
+//     //console.log(error);
+//     console.error("Error searching players:", error);
+//     res.status(500).send("Error searching players");
+//   }
+// }
+
+export const searchPlayers = async (req, res) => {
+  try {
+    const searchTerm = req.body.searchTerm;
+    console.log("Search Term:", searchTerm);
+
+    if (!searchTerm) {
+      return res.status(400).json({ success: false, message: "Search term is required" });
+    }
+
+    const players = await playerModel.find(
+      {
+        $expr: {
+          $regexMatch: {
+            input: { $concat: ["$name", " ", "$university", " ", "$category"] },
+            regex: searchTerm,
+            options: "i"
+          }
+        }
+      },
+      "name university category playerValue"
+    );
+
     res.json({ success: true, players });
+  } catch (error) {
+    console.error("Error searching players:", error);
+    res.status(500).send("Error searching players");
+  }
+};
+
+
+
+export const getPlayerById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const player = await playerModel.findById(id);
+    if (!player) {
+      return res.status(404).json({ success: false, message: "Player not found" });
+    }
+
+    return res.json({ success: true, player });
+
   } catch (error) {
     console.error("Error fetching players:", error);
     res.status(500).send("Error querying players");
   }
 };
+
+export const deleteByID = async (req,res) =>{
+  console.log("came here")
+  try{
+      const {id} = req.body;
+      const player = await playerModel.findByIdAndDelete(id);
+      if(!player){
+          return res.json({success:false,message:"Player not found"});
+      }
+      return res.json({success:true,message:"Player deleted successfully"});
+  }catch(err){
+      return res.json({success:false,message:err.message});
+  }
+}

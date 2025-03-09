@@ -16,6 +16,8 @@ import Leaderboard from "./pages/Leaderboard";
 import TournamentSummary from "./pages/TournamentSummary";
 import AddPlayer from "./pages/AddPlayer"
 import AdminDashboard from "./pages/AdminDashboard";
+import PlayerStat from "./pages/PlayerStat";
+
 
 const App = () => {
   return (
@@ -34,6 +36,7 @@ const App = () => {
         <Route path="/tournament-summary" element={<TournamentSummary />} />
         <Route path="/add-player" element={<AddPlayer />} />
         <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route path="/player-stat/:id" element={<PlayerStat />} />
       </Routes>
     </div>
   );
