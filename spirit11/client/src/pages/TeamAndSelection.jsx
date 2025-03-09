@@ -20,13 +20,17 @@ const TeamAndSelection = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        if(searchTerm === "") {
-        const response_normal = await axios.get(backendUrl + '/api/player/fetch-players');
-        console.log("NO SEARCH TERM",response_normal.data);
-        setPlayers(response_normal.data.players);
-        }
-        else {
-          const response_search = await axios.post(backendUrl + '/api/player/search-Players' , {searchTerm});
+        if (searchTerm === "") {
+          const response_normal = await axios.get(
+            backendUrl + "/api/player/fetch-players"
+          );
+          console.log("NO SEARCH TERM", response_normal.data);
+          setPlayers(response_normal.data.players);
+        } else {
+          const response_search = await axios.post(
+            backendUrl + "/api/player/search-Players",
+            { searchTerm }
+          );
           console.log("WITH SEARCH TERM", searchTerm, response_search.data);
           setPlayers(response_search.data.players);
         }
@@ -44,33 +48,36 @@ const TeamAndSelection = () => {
       }
     };
 
-    const fetchNoOfPlayers = async () => { 
+    const fetchNoOfPlayers = async () => {
       try {
-        const { data } = await axios.get(`${backendUrl}/api/user/fetch-no-of-players`);
-        console.log(data)
+        const { data } = await axios.get(
+          `${backendUrl}/api/user/fetch-no-of-players`
+        );
+        console.log(data);
         setNoOfPlayers(data.noOfPlayers);
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     fetchPlayers();
     fetchTeam();
     fetchNoOfPlayers();
   }, [backendUrl, searchTerm]);
 
-
   const handleUndoPurchase = async (player) => {
     const confirmUndo = window.confirm(`Undo purchase of ${player.name}?`);
     if (confirmUndo) {
       try {
-        const { data } = await axios.post(`${backendUrl}/api/user/undo-purchase`, {
-          playerId: player._id,
-        });
+        const { data } = await axios.post(
+          `${backendUrl}/api/user/undo-purchase`,
+          {
+            playerId: player._id,
+          }
+        );
         if (data.success) {
           toast.success(data.message);
-         window.location.reload();
-
+          window.location.reload();
         }
       } catch (error) {
         console.error("Error undoing purchase:", error);
@@ -80,20 +87,21 @@ const TeamAndSelection = () => {
 
   const handlePurchase = async (player) => {
     //const confirmPurchase = window.confirm(`Purchase ${player.name}?`);
-      try {
-        const res = await  axios.post(backendUrl + '/api/user/buy-player', {
-          playerId: player._id,
-        });
-        //alert("Player Purchased Successfully");
-        if(res.data.success){
-          toast.success(res.data.message);
-        }
-        else{
-          toast.error(res.data.message);
-        }
-      } catch (error) {
-        console.error("Error purchasing player:", error);
+    try {
+      const res = await axios.post(backendUrl + "/api/user/buy-player", {
+        playerId: player._id,
+
+      });
+      //alert("Player Purchased Successfully");
+      if (res.data.success) {
+        toast.success(res.data.message);
+        setNoOfPlayers(noOfPlayers + 1);
+      } else {
+        toast.error(res.data.message);
       }
+    } catch (error) {
+      console.error("Error purchasing player:", error);
+    }
   };
 
   const handleView = async (player) => {
@@ -110,8 +118,11 @@ const TeamAndSelection = () => {
       {/* Tabs for Navigation */}
       <div className="flex justify-center space-x-4 mb-6">
         <button
-          onClick={() => setView("team")}
-          className={`px-6 py-2 font-semibold rounded-full transition ${
+          onClick={() => {
+            setView("team");
+            window.location.reload();
+          }}
+          className={`px-6 py-2 font-semibold rounded-md transition ${
             view === "team"
               ? "bg-blue-600 text-white"
               : "bg-gray-500 hover:bg-gray-400"
@@ -141,7 +152,6 @@ const TeamAndSelection = () => {
       {view === "selection" && (
         <div className="w-full p-4">
           <div className="flex justify-center p-4">
-            
             <input
               type="text"
               placeholder="Search players..."
@@ -151,7 +161,6 @@ const TeamAndSelection = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-
 
           {/* <div>
             {players.filter(player => player.name.toLowerCase().includes(searchTerm.toLowerCase())).map(player => (
@@ -169,7 +178,10 @@ const TeamAndSelection = () => {
           <div>
             {players.length > 0 ? (
               players.map((player) => (
-                <div key={player._id} className="mb-2 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-4 rounded-lg shadow-lg w-full justify-content-right transform transition-all duration-300 hover:scale-101 hover:ring-4 hover:ring-gray-600">
+                <div
+                  key={player._id}
+                  className="mb-2 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-4 rounded-lg shadow-lg w-full justify-content-right transform transition-all duration-300 hover:scale-101 hover:ring-4 hover:ring-gray-600"
+                >
                   <PlayerCardForBudget {...player} />
                   <div className="rounded-md flex justify-end pr-4">
                     <button
