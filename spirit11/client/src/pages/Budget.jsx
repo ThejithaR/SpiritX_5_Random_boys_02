@@ -42,7 +42,7 @@ const Budget = () => {
   return (
     <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">
       <NavBar />
-      <SpiritButton />
+      {/* <SpiritButton /> */}
       {/* Heading */}
       <h1 className="text-3xl font-bold text-center mb-6 mt-30">🏏 Budget Overview</h1>
 

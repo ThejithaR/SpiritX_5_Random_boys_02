@@ -11,7 +11,7 @@ const SpiritButton = () => {
   return (
     <div>
       <button
-        className="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold shadow-md hover:bg-gray-200"
+        className="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold shadow-md hover:bg-gray-200 cursor-pointer"
         onClick={handleClick}
       >
         Spiriter

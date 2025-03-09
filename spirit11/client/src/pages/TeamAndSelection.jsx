@@ -112,7 +112,7 @@ const TeamAndSelection = () => {
   return (
     <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">
       <Navbar />
-      <SpiritButton />
+      {/* <SpiritButton /> */}
       <h1 className="text-5xl font-bold text-center mb-6 mt-30 p-4">
         🏏 Player Selection & My Team
       </h1>
