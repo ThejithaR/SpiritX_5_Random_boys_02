@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
 import NavBar from "../components/Navbar.jsx";
+import SpiritButton from "../components/SpiritButton.jsx";
 
 const AddPlayer = () => {
   const { backendUrl } = useContext(AppContext);
@@ -76,6 +77,7 @@ const AddPlayer = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 p-6">
       <NavBar />
+      <SpiritButton />
       <div className="w-full mt-30 max-w-3xl bg-white shadow-lg rounded-lg p-8">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Add New Player
