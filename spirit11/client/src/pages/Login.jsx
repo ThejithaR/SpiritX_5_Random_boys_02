@@ -14,6 +14,8 @@ const Login = () => {
   const [confirmPassword , setConfirmPassword] = useState('')
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 //   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate()
 
@@ -26,7 +28,7 @@ const Login = () => {
     if (/[A-Z]/.test(password)) strength++;
     if (/[^a-zA-Z0-9]/.test(password)) strength++;
     if (/[0-9]/.test(password)) strength++;
-    // if (password.length >= 12) strength++;
+    if (password.length >= 12 && strength > 4) strength++;
     return strength;
   };
 
@@ -49,12 +51,12 @@ const Login = () => {
 
   const getStrengthLabel = () => {
     const labels = ['Too Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
-    return labels[passwordStrength - 1];
+    return labels[passwordStrength - 2];
   };
 
   const getStrengthColor = () => {
     const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500', 'bg-blue-500'];
-    return colors[passwordStrength - 1];
+    return colors[passwordStrength - 2];
   };
 
 
@@ -149,10 +151,11 @@ const Login = () => {
                         <div className='mb-4'>
                             <div className='flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
                                 <img src={assets.lock_icon} alt='' />
-                                <input value={password} onChange={handlePasswordChange} className='bg-transparent outline-none' type='password' placeholder='Password' required />
+                                <input value={password} onChange={handlePasswordChange} className='bg-transparent outline-none flex-1' type={showPassword?'text':'password'} placeholder='Password' required />
+                                <img src={showPassword?assets.show:assets.hide} alt='' className='cursor-pointer w-4 h-4' onClick={() => setShowPassword(!showPassword)} />
                             </div>
                             <div className='mt-2 h-2 rounded-full w-full bg-gray-300'>
-                                <div className={`h-2 rounded-full ${getStrengthColor()}`} style={{ width: `${(passwordStrength / 5) * 100}%` }}></div>
+                                <div className={`h-2 rounded-full ${getStrengthColor()}`} style={{ width: `${(passwordStrength / 6) * 100}%` }}></div>
                             </div>
                             <p className='text-xs mt-1 text-gray-400'>{getStrengthLabel()}</p>
                         </div>
@@ -162,11 +165,12 @@ const Login = () => {
                             <input
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
-                                className={`bg-transparent outline-none`}
-                                type='password'
+                                className={`bg-transparent outline-none flex-1`}
+                                type={showConfirmPassword?'text':'password'}
                                 placeholder='Confirm password'
                                 required
                             />
+                            <img src={showConfirmPassword?assets.show:assets.hide} alt='' className='cursor-pointer w-4 h-4' onClick={() => setShowConfirmPassword(!showConfirmPassword)} />
                         </div>
                         {confirmPassword && confirmPassword !== password && <p className='text-xs text-red-500 text-left'>Passwords do not match</p>}
                         <br></br>
@@ -176,7 +180,8 @@ const Login = () => {
                         <div className='mb-4'>
                             <div className='flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
                                 <img src={assets.lock_icon} alt='' />
-                                <input value={password} onChange={handlePasswordChange} className='bg-transparent outline-none' type='password' placeholder='Password' required />
+                                <input value={password} onChange={handlePasswordChange} className='bg-transparent outline-none flex-1' type={showPassword?'text':'password'} placeholder='Password' required />
+                                <img src={showPassword?assets.show:assets.hide} alt='' className='cursor-pointer w-4 h-4' onClick={() => setShowPassword(!showPassword)} />
                             </div>
                         </div>
                     </div>
