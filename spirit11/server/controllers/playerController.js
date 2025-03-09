@@ -148,6 +148,7 @@ export const getPlayers = async (req, res) => {
     console.error("Error fetching players:", error);
     res.status(500).send("Error querying players");
 }
+
 };
 
 export const searchPlayers = async (req, res) => {

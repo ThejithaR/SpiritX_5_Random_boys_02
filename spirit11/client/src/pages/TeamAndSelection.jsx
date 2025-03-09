@@ -14,8 +14,15 @@ const TeamAndSelection = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
+        if(searchTerm === "") {
         const response = await axios.get(backendUrl + '/api/player/get-players');
+        console.log("NO SEARCH TERM",response.data);
         setPlayers(response.data);
+        }
+        else {
+          const response = await axios.post(backendUrl + '/api/player/searchPlayers' , searchTerm);
+          setPlayers(response.data.players);
+        }
       } catch (error) {
         console.error("Error fetching players:", error);
       }
@@ -58,7 +65,8 @@ const TeamAndSelection = () => {
     }
   };
 
-  
+
+
 
   return (
     <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">
@@ -96,6 +104,20 @@ const TeamAndSelection = () => {
               </div>
             ))}
           </div> */}
+
+          <div>
+            {players.length > 0 ? players.map(player => (
+              <div key={player._id} className="mb-2">
+                <PlayerCardForBudget {...player} />
+                <button 
+                  onClick={() => handlePurchase(player)}
+                  className="bg-green-500 text-white px-4 py-2 rounded mt-2">
+                  Buy
+                </button>
+              </div>
+            )) : <p className="text-center text-gray-300 mt-4">No players available.</p>}
+          </div>
+
         </div>
 
         {/* My Team View */}
