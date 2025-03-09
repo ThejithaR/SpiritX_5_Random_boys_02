@@ -3,6 +3,7 @@ import axios from "axios";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import NavBar from "../components/Navbar.jsx";
+import SpiritButton from "../components/SpiritButton.jsx";
 
 const TournamentSummary = () => {
   const { backendUrl } = useContext(AppContext);
@@ -44,6 +45,7 @@ const TournamentSummary = () => {
   return (
     <div className="h-screen w-screen flex flex-col bg-gradient-to-r from-gray-600 via-gray-400 to-gray-300 overflow-y-scroll">
       <NavBar />
+      <SpiritButton />
       <h1 className="text-4xl font-bold text-gray-800 m-2 ml-5 mt-30 text-center">
         Tournament Summary
       </h1>
