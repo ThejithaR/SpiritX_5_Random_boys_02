@@ -1,9 +1,6 @@
 import playerModel from "../models/playerModel.js";
 import userModel from "../models/userModel.js";
-import {
-  computePlayerStats,
-  calPlayerPoints,
-} from "../services/playerServices.js";
+import { computePlayerStats, calPlayerPoints } from "../services/playerServices.js";
 
 export const addPlayer = async (req, res) => {
   let {
@@ -60,24 +57,6 @@ export const addPlayer = async (req, res) => {
   } = playerStats;
 
   try {
-    //   console.log({
-    //     name,
-    //     university,
-    //     category,
-    //     totalRuns,
-    //     ballsFaced,
-    //     inningsPlayed,
-    //     wickets,
-    //     oversBowled,
-    //     runsConceded,
-    //     battingStrikeRate,
-    //     battingAverage,
-    //     bowlingStrikeRate,
-    //     economyRate,
-    //     playerPoints,
-    //     playerValue,
-    //   });
-
     console.log({
       name,
       university,
@@ -121,7 +100,6 @@ export const addPlayer = async (req, res) => {
   }
 };
 
-
 export const fetchPlayers = async (req, res) => {
   
   try {
@@ -149,6 +127,37 @@ export const getPlayers = async (req, res) => {
     );
     console.log(users);
     res.json({ success: true, users });
+  } catch (error) {
+    console.error("Error fetching players:", error);
+    res.status(500).send("Error querying players");
+}
+
+};
+
+export const searchPlayers = async (req, res) => {
+  try {
+    const { searchTerm } = req.body;
+    const players = await playerModel.find(
+      { name: { $regex: searchTerm, $options: "i" } },
+      "name university category playerValue"
+    );
+    res.json({ success: true, players });
+  } catch (error) {
+    console.error("Error searching players:", error);
+    res.status(500).send("Error searching players");
+  }
+}
+export const getPlayerById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const player = await playerModel.findById(id);
+    if (!player) {
+      return res.status(404).json({ success: false, message: "Player not found" });
+    }
+
+    return res.json({ success: true, player });
+
   } catch (error) {
     console.error("Error fetching players:", error);
     res.status(500).send("Error querying players");
