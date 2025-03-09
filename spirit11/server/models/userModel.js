@@ -51,6 +51,11 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+
+  team: {
+    type: Array,
+    default: [],
+  },
 });
 
 //userModel will only be created if it is not already created

@@ -5,7 +5,7 @@ import { getUserData, fetchTeam } from "../controllers/userController.js";
 const userRouter = Router();
 
 userRouter.get("/data",userAuth,getUserData)
-userRouter.get("/fetch-team", fetchTeam)
+userRouter.get("/fetch-team", userAuth,fetchTeam)
 
 
 export default userRouter;
