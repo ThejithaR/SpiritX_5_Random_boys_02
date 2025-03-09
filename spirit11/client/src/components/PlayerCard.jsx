@@ -9,7 +9,7 @@ const PlayerCard = ({ player, refreshPlayers }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const {role} = useContext(AppContext);
-  
+  console.log(role)
   const openModal = () => {
     setIsModalOpen(true);
     document.body.style.overflow = "hidden"; 
@@ -28,7 +28,7 @@ const PlayerCard = ({ player, refreshPlayers }) => {
     setIsDeleting(true);
 
     try {
-      const { data } = await axios.delete(`http://localhost:8800/api/player/delete/${player._id}`);
+      const { data } = await axios.delete(`http://localhost:5000/api/player/delete/${player._id}`);
 
       if (data.success) {
         toast.success("Player deleted successfully");
