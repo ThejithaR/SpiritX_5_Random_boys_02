@@ -61,25 +61,25 @@ const Players = () => {
       {/* Category Filter */}
       <div className="flex justify-center space-x-4 mb-6">
         <button
-          className={`px-4 py-2 rounded-md ${selectedCategory === "All" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          className={`px-4 py-2 rounded-md cursor-pointer ${selectedCategory === "All" ? "bg-blue-500 text-white" : "bg-gray-300 "}`}
           onClick={() => setSelectedCategory("All")}
         >
           All
         </button>
         <button
-          className={`px-4 py-2 rounded-md ${selectedCategory === "Batsman" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          className={`px-4 py-2 rounded-md cursor-pointer ${selectedCategory === "Batsman" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
           onClick={() => setSelectedCategory("Batsman")}
         >
           Batsman
         </button>
         <button
-          className={`px-4 py-2 rounded-md ${selectedCategory === "Bowler" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          className={`px-4 py-2 rounded-md cursor-pointer  ${selectedCategory === "Bowler" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
           onClick={() => setSelectedCategory("Bowler")}
         >
           Bowler
         </button>
         <button
-          className={`px-4 py-2 rounded-md ${selectedCategory === "All-Rounder" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          className={`px-4 py-2 rounded-md cursor-pointer ${selectedCategory === "All-Rounder" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
           onClick={() => setSelectedCategory("All-Rounder")}
         >
           All-Rounder
@@ -90,7 +90,7 @@ const Players = () => {
       <div className="flex justify-end items-center space-x-4 mb-6">
             <span className="text-gray-700 font-medium">Sort by:</span>
             <select
-              className="px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="px-4 py-2 rounded-md border cursor-pointer border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               onChange={(e) => setSortBy(e.target.value)}
               value={sortBy}
             >
@@ -109,7 +109,7 @@ const Players = () => {
       {/* Displaying sorted players */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {sortedPlayers.map((player) => (
-          <PlayerCard key={player._id} player={player} />
+          <PlayerCard key={player._id} player={player} refreshPlayers={fetchPlayers} />
         ))}
       </div>
     </div>
