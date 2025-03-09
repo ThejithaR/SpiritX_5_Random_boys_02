@@ -7,6 +7,7 @@ import hand_wave from './hand_wave.png'
 import header_img from './header_img.png'
 import player_img from './Player.png'
 import cricket_gif from './cricket.gif'
+import batting_img from './batting.png'
 
 export const assets = {
     arrow_icon,
@@ -17,5 +18,6 @@ export const assets = {
     hand_wave,
     header_img,
     player_img,
-    cricket_gif
+    cricket_gif,
+    batting_img
 }
