@@ -60,67 +60,68 @@ const Login = () => {
   };
 
 
-  const onSubmitHandler = async(e)=>{
+  const onSubmitHandler = async (e) => {
     try {
-        e.preventDefault();
-        setErrorMessage('');
-        // setShowPopup(false);
+      e.preventDefault();
+      setErrorMessage('');
   
-        if (state === 'Sign Up') {
-          if (!isPasswordValid(password)) {
-            setErrorMessage('Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, and a special character.');
-            // setShowPopup(true);
-            toast.error(errorMessage);
-            return;
-          }
-  
-          if (password !== confirmPassword) {
-            setErrorMessage('Passwords do not match.');
-            // setShowPopup(true);
-            toast.error(errorMessage);
-            return;
-          }
-
-          if (username.length < 8) {
-            setErrorMessage('Username need to be atleast 8 characters long');
-            // setShowPopup(true);
-            toast.error(errorMessage);
-            return;
-          }
-  
-          axios.defaults.withCredentials = true;
-          const { data } = await axios.post(backendUrl + '/api/auth/register', {
-            username,
-            email,
-            password,
-          });
-  
-          if (data.success) {
-            setIsLoggedin(true);
-            getUserData();
-            navigate('/');
-          } else {
-            toast.error(data.message);
-          }
-        } else {
-          axios.defaults.withCredentials = true;
-          const { data } = await axios.post(backendUrl + '/api/auth/login', {
-            username,
-            password,
-          });
-  
-          if (data.success) {
-            setIsLoggedin(true);
-            getUserData();
-            navigate('/');
-          } else {
-            toast.error(data.message);
-          }
+      if (state === 'Sign Up') {
+        if (!isPasswordValid(password)) {
+          setErrorMessage('Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, and a special character.');
+          toast.error(errorMessage);
+          return;
         }
-      } catch (err) {
-        toast.error(err.message);
+  
+        if (password !== confirmPassword) {
+          setErrorMessage('Passwords do not match.');
+          toast.error(errorMessage);
+          return;
+        }
+  
+        if (username.length < 8) {
+          setErrorMessage('Username needs to be at least 8 characters long');
+          toast.error(errorMessage);
+          return;
+        }
+  
+        axios.defaults.withCredentials = true;
+        const { data } = await axios.post(backendUrl + '/api/auth/register', {
+          username,
+          email,
+          password,
+        });
+  
+        if (data.success) {
+          // Save the token to localStorage after successful registration
+          localStorage.setItem('token', data.token);  
+          setIsLoggedin(true);
+          await getUserData();  // Fetch user data after registration
+          navigate('/');
+        } else {
+          toast.error(data.message);
+        }
+      } else {
+        axios.defaults.withCredentials = true;
+        const { data } = await axios.post(backendUrl + '/api/auth/login', {
+          username,
+          password,
+        });
+  
+        if (data.success) {
+          // Save the token to localStorage after successful login
+          localStorage.setItem('token', data.token);  
+          setIsLoggedin(true);
+          await getUserData();  // Fetch user data after login
+          navigate('/');
+        } else {
+          toast.error(data.message);
+        }
+      }
+    } catch (err) {
+      toast.error(err.message);
     }
-  }
+  };
+  
 
 
 
