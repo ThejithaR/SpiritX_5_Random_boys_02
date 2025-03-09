@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import PlayerCardForMyTeam from "../components/PlayerCardForBudget";
 import axios from "axios";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
