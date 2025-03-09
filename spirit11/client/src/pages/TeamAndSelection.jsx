@@ -35,21 +35,7 @@ const TeamAndSelection = () => {
     fetchTeam();
   }, [backendUrl]);
 
-  const handlePurchase = async (player) => {
-    const confirmPurchase = window.confirm(
-      `Buy ${player.name} for Rs ${player.value}?`
-    );
-    if (confirmPurchase) {
-      try {
-        await axios.post(`${backendUrl}/api/user/buy-player`, {
-          playerId: player._id,
-        });
-        setTeam([...team, player]);
-      } catch (error) {
-        console.error("Error purchasing player:", error);
-      }
-    }
-  };
+
   const handleUndoPurchase = async (player) => {
     const confirmUndo = window.confirm(`Undo purchase of ${player.name}?`);
     if (confirmUndo) {
@@ -63,11 +49,11 @@ const TeamAndSelection = () => {
     }
   };
 
+  
+
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white">
-      <h1 className="text-4xl font-bold text-center mb-6">
-        🏏 Player Selection & My Team
-      </h1>
+    <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">
+      <h1 className="text-3xl font-bold text-center mb-6">🏏 Player Selection & My Team</h1>
 
       {/* Tabs for Navigation */}
       <div className="flex justify-center space-x-4 mb-6">
@@ -102,6 +88,7 @@ const TeamAndSelection = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+    
         </div>
       )}
 
