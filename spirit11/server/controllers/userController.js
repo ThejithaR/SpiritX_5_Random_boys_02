@@ -42,3 +42,26 @@ export const fetchTeam = async(req,res)=>{
         return res.json({success:false,message:err.message})
     }
 }
+
+export const buyPlayer = async(req,res)=>{
+    try{
+        const {userId,playerId} = req.body;
+        const user = await userModel.findById(userId);
+        if(!user){
+            return res.json({success:false,message:"User not found!"})
+        }
+        const player = await playerModel.findById(playerId);
+        if(!player){
+            return res.json({success:false,message:"Player not found!"})
+        }
+        if(user.budget < player.playerValue){
+            return res.json({success:false,message:"Insufficient budget"})
+        }
+        user.budget -= player.value;
+        user.team.push(playerId);
+        await user.save();
+        res.json({success:true,message:"Player added to team successfully"})
+    }catch(err){
+        return res.json({success:false,message:err.message})
+    }
+}
