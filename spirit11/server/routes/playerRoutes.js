@@ -10,11 +10,12 @@ import { getPlayerById } from "../controllers/playerController.js";
 
 const playerRouter = Router();
 
-playerRouter.post("/add-player", addPlayer);
-playerRouter.get("/get-players", getPlayers);
-playerRouter.get("/fetch-players", fetchPlayers);
-playerRouter.post("/searchPlayers", searchPlayers);
-playerRouter.get("/get-player-by-id/:id", getPlayerById);
+
 playerRouter.delete('/delete',deleteByID)
+playerRouter.post('/add-player', addPlayer)
+playerRouter.get('/get-players', getPlayers)
+playerRouter.get('/fetch-players',fetchPlayers)
+playerRouter.post('/search-Players', searchPlayers)
+playerRouter.get('/get-player-by-id/:id',getPlayerById)
 
 export default playerRouter;
