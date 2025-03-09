@@ -4,6 +4,7 @@ import PlayerCardForMyTeam from "../components/PlayerCardForBudget";
 import axios from "axios";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
+
 const TeamAndSelection = () => {
   const { backendUrl } = useContext(AppContext);
   const [view, setView] = useState("team"); // "selection" or "team"
