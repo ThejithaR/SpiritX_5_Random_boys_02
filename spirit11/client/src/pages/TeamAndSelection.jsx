@@ -193,7 +193,7 @@ const TeamAndSelection = () => {
 
                     <button
                       onClick={() => handlePurchase(player)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-full mt-2 flex w-40 text-center flex justify-center items-center"
+                      className="bg-green-500 text-white px-4 py-2 rounded-full mt-2  w-40 text-center flex justify-center items-center"
                     >
                       Buy
                     </button>
