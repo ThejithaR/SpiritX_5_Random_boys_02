@@ -4,7 +4,7 @@ import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import PlayerCard from "../components/PlayerCard";
 import { assets } from "../assets/assets";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar.jsx";
 
 const Players = () => {
   const [players, setPlayers] = useState([]);
@@ -18,7 +18,6 @@ const Players = () => {
       const { data } = await axios.get(backendUrl + "/api/player/fetch-players");
 
       if (data.success) {
-        toast.success("Players fetched successfully");
         setPlayers(data.players);
       } else {
         toast.error("Player fetching failed");

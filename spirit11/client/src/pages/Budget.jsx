@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 import {toast} from "react-toastify";
 import PlayerCard from "../components/PlayerCardForBudget";
 import axios from "axios";
-import NavBar from "../components/Navbar";
+import NavBar from "../components/NavBar";
 //import { set } from "mongoose";
 
 const Budget = () => {

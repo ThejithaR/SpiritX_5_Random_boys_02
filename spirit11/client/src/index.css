@@ -7,3 +7,37 @@
 * {
   font-family: "Outfit", sans-serif;
 }
+
+/* Custom Scrollbar Styles */
+.custom-scrollbar {
+  overflow-y: auto;
+}
+
+/* Width of the scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track (Background of the scrollbar) */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #2d2d2d3d; /* Dark Gray */
+  border-radius: 5px;
+}
+
+/* Scrollbar Thumb (Draggable part) */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #4b5563; /* Gray-500 */
+  border-radius: 5px;
+  border: 2px solid #2d2d2d; /* Adds a border for better visibility */
+}
+
+/* Scrollbar Thumb on Hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #6b7280; /* Lighter gray */
+}
+
+/* Scrollbar Buttons (Optional) */
+.custom-scrollbar::-webkit-scrollbar-button {
+  display: none; /* Hide scrollbar buttons */
+}
+

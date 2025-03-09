@@ -117,7 +117,7 @@ export const fetchPlayers = async (req, res) => {
 export const getPlayers = async (req, res) => {
   try {
     const users = await userModel.find(
-      {},
+      {role : "user"},
       "username playerPoints team teamPoints"
     );
     await Promise.all(

@@ -1,7 +1,11 @@
-import { Router } from 'express'
-import { addPlayer, fetchPlayers, searchPlayers} from '../controllers/playerController.js'
-import { getPlayers } from '../controllers/playerController.js'
-import { getPlayerById } from '../controllers/playerController.js'
+import { Router } from "express";
+import {
+  addPlayer,
+  fetchPlayers,
+  searchPlayers,
+} from "../controllers/playerController.js";
+import { getPlayers } from "../controllers/playerController.js";
+import { getPlayerById } from "../controllers/playerController.js";
 
 const playerRouter = Router();
 

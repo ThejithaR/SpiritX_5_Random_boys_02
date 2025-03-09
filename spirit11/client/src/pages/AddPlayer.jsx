@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
-import NavBar from "../components/Navbar";
+import NavBar from "../components/Navbar.jsx";
 
 const AddPlayer = () => {
   const { backendUrl } = useContext(AppContext);
