@@ -93,7 +93,7 @@ const ResetPassword = () => {
         onClick={() => navigate("/")}
         src={assets.logo}
         alt=""
-        className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"
+        className="absolute left-5 rounded-full sm:left-20 top-5 w-15 sm:w-15 cursor-pointer"
       />
 
       {!isEmailSent && (
@@ -165,17 +165,32 @@ const ResetPassword = () => {
           <p className="text-center mb-6 text-indigo-300">
             Enter the new password below
           </p>
-          <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-            <img src={assets.lock_icon} alt="" />
-            <input
-              className="bg-transparent outline-none text-white"
-              type="password"
-              placeholder="Enter new password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              required
-            />
-          </div>
+                              <div>
+                        <div className='mb-4'>
+                            <div className='flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]'>
+                                <img src={assets.lock_icon} alt='' />
+                                <input value={password} onChange={handlePasswordChange} className='bg-transparent outline-none' type='password' placeholder='Password' required />
+                            </div>
+                            <div className='mt-2 h-2 rounded-full w-full bg-gray-300'>
+                                <div className={`h-2 rounded-full ${getStrengthColor()}`} style={{ width: `${(passwordStrength / 5) * 100}%` }}></div>
+                            </div>
+                            <p className='text-xs mt-1 text-gray-400'>{getStrengthLabel()}</p>
+                        </div>
+
+                        <div className={`mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C] ${confirmPassword && confirmPassword !== password ? 'border border-red-500' : ''}`}>
+                            <img src={assets.lock_icon} alt='' />
+                            <input
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                className={`bg-transparent outline-none`}
+                                type='password'
+                                placeholder='Confirm password'
+                                required
+                            />
+                        </div>
+                        {confirmPassword && confirmPassword !== password && <p className='text-xs text-red-500 text-left'>Passwords do not match</p>}
+                        <br></br>
+                    </div>
           <button className="w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium">
             Submit
           </button>
