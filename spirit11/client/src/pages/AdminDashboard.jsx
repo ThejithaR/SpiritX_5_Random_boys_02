@@ -17,10 +17,11 @@ const AdminDashboard = () => {
   ];
 
     return (
-        <div>
-            <NavBar />
+      <div>
+        <NavBar />
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 p-6">
-          <div className="w-full max-w-4xl  gap-6">
+          <div className="w-full max-w-4xl text-center gap-6">
+            <h1 className="text-4xl">Admin Dashboard</h1>
             {adminOptions.map((option, index) => (
               <div
                 key={index}
