@@ -32,10 +32,8 @@ export const fetchTeam = async (req, res) => {
     }
     const team = user.team;
     const budget = user.budget;
-    //console.log(team);
 
     const players = await getPlayersByIDs({ playerIds: team });
-    console.log(players);
     res.json({ success: true, players, budget });
   } catch (err) {
     return res.json({ success: false, message: err.message });
@@ -44,7 +42,6 @@ export const fetchTeam = async (req, res) => {
 
 export const undoPurchase = async (req, res) => {
   try {
-    console.log(req.body);
 
     const { userId, playerId } = req.body;
 
@@ -62,7 +59,6 @@ export const undoPurchase = async (req, res) => {
       { new: true } // Returns the updated document
     );
 
-    console.log(updatedUser)
     if (!updatedUser) {
       return res
         .status(404)
@@ -104,3 +100,18 @@ export const buyPlayer = async (req, res) => {
     return res.json({ success: false, message: err.message });
   }
 };
+
+export const fetchNoOfPlayers = async (req, res) => { 
+  try {
+    const { userId } = req.body;
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.json({ success: false, message: "User not found!" });
+    }
+    const noOfPlayers = user.team.length;
+    res.json({ success: true, noOfPlayers });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}

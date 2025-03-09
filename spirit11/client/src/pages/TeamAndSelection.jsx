@@ -12,6 +12,7 @@ const TeamAndSelection = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [players, setPlayers] = useState([]);
   const [team, setTeam] = useState([]);
+  const [noOfPlayers, setNoOfPlayers] = useState(0);
 
   const navigate = useNavigate();
 
@@ -22,14 +23,13 @@ const TeamAndSelection = () => {
           const response = await axios.get(
             backendUrl + "/api/player/get-players"
           );
-          console.log("NO SEARCH TERM", response.data);
           setPlayers(response.data);
         } else {
           const response = await axios.post(
             backendUrl + "/api/player/searchPlayers",
             searchTerm
           );
-          setPlayers(response.data.players);
+          setPlayers(response.data);
         }
       } catch (error) {
         console.error("Error fetching players:", error);
@@ -45,8 +45,19 @@ const TeamAndSelection = () => {
       }
     };
 
+    const fetchNoOfPlayers = async () => { 
+      try {
+        const { data } = await axios.get(`${backendUrl}/api/user/fetch-no-of-players`);
+        console.log(data)
+        setNoOfPlayers(data.noOfPlayers);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     fetchPlayers();
     fetchTeam();
+    fetchNoOfPlayers();
   }, []);
 
   const handleUndoPurchase = async (player) => {
@@ -81,16 +92,6 @@ const TeamAndSelection = () => {
       {/* Tabs for Navigation */}
       <div className="flex justify-center space-x-4 mb-6">
         <button
-          onClick={() => setView("selection")}
-          className={`px-6 py-2 font-semibold rounded-md transition ${
-            view === "selection"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-500 hover:bg-gray-400"
-          }`}
-        >
-          Player Selection
-        </button>
-        <button
           onClick={() => setView("team")}
           className={`px-6 py-2 font-semibold rounded-md transition ${
             view === "team"
@@ -100,6 +101,23 @@ const TeamAndSelection = () => {
         >
           My Team
         </button>
+        <button
+          onClick={() => setView("selection")}
+          className={`px-6 py-2 font-semibold rounded-md transition ${
+            view === "selection"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-500 hover:bg-gray-400"
+          }`}
+        >
+          Player Selection
+        </button>
+
+        <label className="m-3 bg-gray-500px-6 py-2 font-semibold rounded-md text-xl">
+          Players Selected :
+        </label>
+        <label className="m-3 bg-gray-500px-6 py-2 font-bold rounded-md text-gray-900 text-xl">
+          {noOfPlayers} / 11
+        </label>
       </div>
 
       {view === "selection" && (
@@ -156,18 +174,20 @@ const TeamAndSelection = () => {
                   className="bg-gray-800 p-4 rounded-lg shadow-lg w-full mb-5"
                 >
                   <PlayerCardForMyTeam {...player} />
-                  <button
-                    onClick={() => handleUndoPurchase(player)}
-                    className="w-40 mt-3 bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-md"
-                  >
-                    Undo Purchase
-                  </button>
-                  <button
-                    onClick={() => handleView(player)}
-                    className="w-40 mt-3 bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-md ml-5"
-                  >
-                    View
-                  </button>
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => handleView(player)}
+                      className="w-40 mt-3 bg-white hover:bg-white-600 text-black font-bold py-2 rounded-full mr-5"
+                    >
+                      View
+                    </button>
+                    <button
+                      onClick={() => handleUndoPurchase(player)}
+                      className="w-40 mt-3 bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-full"
+                    >
+                      Undo Purchase
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

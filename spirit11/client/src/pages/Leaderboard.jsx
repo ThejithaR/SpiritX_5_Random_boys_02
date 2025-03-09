@@ -52,17 +52,17 @@ const Leaderboard = () => {
         <table className="w-full border-collapse border border-gray-700">
           <thead>
             <tr className="bg-gray-800">
-              <th className="border border-gray-700 p-2">Name</th>
-              <th className="border border-gray-700 p-2">Player Points</th>
+              <th className="border border-gray-500 p-2">Name</th>
+              <th className="border border-gray-500 p-2">Player Points</th>
             </tr>
           </thead>
           <tbody>
             {playersData.slice(0, filter).map((player, index) => (
-              <tr key={index} className="odd:bg-gray-700 even:bg-gray-800">
-                <td className="border border-gray-700 p-3 ml-[10px]">
+              <tr key={index} className="odd:bg-gray-600 even:bg-gray-700">
+                <td className="border border-gray-500 p-3 ml-[10px]">
                   {player.username}
                 </td>
-                <td className="border border-gray-700 p-2 text-left">
+                <td className="border border-gray-500 p-2 text-left">
                   {Number(player.teamPoints).toFixed(4)}
                 </td>
               </tr>
