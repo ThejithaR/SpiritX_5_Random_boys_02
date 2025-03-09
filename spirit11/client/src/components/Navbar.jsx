@@ -63,29 +63,45 @@ const NavBar = () => {
       {/* Navbar Links */}
       {userData.role === "user" && !isHomePage && (
         <div className="hidden sm:flex gap-6 items-center justify-center">
-          <a href="/" className="text-gray-800 hover:text-blue-500">
+          <p
+            className="text-gray-800 hover:text-blue-500 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             Home
-          </a>
-          <a href="/players" className="text-gray-800 hover:text-blue-500">
+          </p>
+          <p
+            className="text-gray-800 hover:text-blue-500 cursor-pointer"
+            onClick={() => navigate("/players")}
+          >
             Players
-          </a>
-          <a
-            href="/teamandselection"
-            className="text-gray-800 hover:text-blue-500"
+          </p>
+          <p
+            className="text-gray-800 hover:text-blue-500 cursor-pointer"
+            onClick={() => navigate("/teamandselection")}
           >
             TeamSelection
-          </a>
-          <a href="/budget" className="text-gray-800 hover:text-blue-500">
+          </p>
+          <p
+            className="text-gray-800 hover:text-blue-500 cursor-pointer"
+            onClick={() => navigate("/budget")}
+          >
             Budget
-          </a>
-          <a href="/leaderboard" className="text-gray-800 hover:text-blue-500">
+          </p>
+          <p
+            className="text-gray-800 hover:text-blue-500 cursor-pointer"
+            onClick={() => navigate("/leaderboard")}
+          >
             Leaderboard
-          </a>
-          <a href="/Spiriter" className="text-gray-800 hover:text-blue-500">
+          </p>
+          <p
+            className="text-gray-800 hover:text-blue-500 cursor-pointer"
+            onClick={() => navigate("/Spiriter")}
+          >
             Spiriter
-          </a>
+          </p>
         </div>
       )}
+
       {userData ? (
         <div className="w-8 h-8 flex justify-center items-center rounded-full bg-black text-white relative group">
           {userData.username[0].toUpperCase()}
