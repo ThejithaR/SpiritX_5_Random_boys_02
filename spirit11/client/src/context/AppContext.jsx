@@ -13,33 +13,48 @@ export const AppContextProvider = (props) =>{
     const [isLoggedin,setIsLoggedin] = useState(false);
     const [userData,setUserData] = useState(false);
 
-    const getAuthState = async()=>{
-        try{
-            const {data} = await axios.get(backendUrl + '/api/auth/is-auth')
-            if(data.success){
-                setIsLoggedin(true);
-                getUserData();
+    const getAuthState = async () => {
+        try {
+          // Check if user is logged in from localStorage
+          const token = localStorage.getItem('token');
+          if (token) {
+            setIsLoggedin(true);
+            await getUserData();  // Fetch user data if logged in
+          } else {
+            // Check with backend if the token is invalid
+            const { data } = await axios.get(backendUrl + '/api/auth/is-auth');
+            if (data.success) {
+              setIsLoggedin(true);
+              await getUserData();  
             }
-        }catch(e){
-            toast.error(e.message)
+          }
+        } catch (e) {
+          toast.error(e.message);
         }
-    }
-
+      };
 
     const getUserData = async()=>{
         try{
             const {data} = await axios.get(backendUrl+ '/api/user/data')
-            data.success ? setUserData(data.userData) : toast.error(data.message);
+            
+            if (data.success) {
+                setUserData(data.userData); 
+              } else {
+                toast.error(data.message);
+              }
             
         }catch(e){
             toast.error(e.message)
         }
     }
 
-    useEffect (()=>{  //this appcontextprovider is used in main.jsx so whenever the website opens this effect will be used
-        getAuthState();
-    },[])
-    
+
+      useEffect(() => {
+        getAuthState(); 
+      }, []);
+      
+
+      
     const value = {
         backendUrl,
         isLoggedin,setIsLoggedin,
@@ -54,11 +69,3 @@ export const AppContextProvider = (props) =>{
         </AppContext.Provider>
     )
 }
-
-// export const useAuth= ()=>{
-//     const value = useContext(AppContent);
-//     if(!value){
-//         throw new Error("use Auth must be used within a AppContextProvider")
-//     }
-//     return value;
-// }

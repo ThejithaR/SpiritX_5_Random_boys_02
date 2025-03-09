@@ -37,6 +37,7 @@ const NavBar = () => {
       const { data } = await axios.post(backendUrl + "/api/auth/logout");
       data.success && setIsLoggedin(false);
       data.success && setUserData(false);
+      localStorage.removeItem('token');
       navigate("/");
     } catch (error) {
       toast.error(error.message);
