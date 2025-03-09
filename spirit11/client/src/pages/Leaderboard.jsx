@@ -15,8 +15,8 @@ const Leaderboard = () => {
           backendUrl + "/api/player/get-players"
         );
         if (data.success) {
-          console.log(data.players)
-          setPlayersData(data.players);
+          console.log(data.users)
+          setPlayersData(data.users);
         } else {
           toast.error(data.message);
           ``;
@@ -38,13 +38,13 @@ const Leaderboard = () => {
         <input
           type="number"
           min="1"
-          max={playersData.length} 
+          //max={playersData.length} 
           value={filter}
           onChange={(e) => setFilter(Number(e.target.value))} // Update filter state on input change
           className="p-1 text-black rounded"
         />
       </div>
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-4xl">
         <table className="w-full border-collapse border border-gray-700">
           <thead>
             <tr className="bg-gray-800">
@@ -55,11 +55,11 @@ const Leaderboard = () => {
           <tbody>
             {playersData.slice(0, filter).map((player, index) => (
               <tr key={index} className="odd:bg-gray-700 even:bg-gray-800">
-                <td className="border border-gray-700 p-2 text-left">
-                  {player.name}
+                <td className="border border-gray-700 p-3 ml-[10px]">
+                  {player.username}
                 </td>
                 <td className="border border-gray-700 p-2 text-left">
-                  {Number(player.playerPoints).toFixed(4)}
+                  {Number(player.teamPoints).toFixed(4)}
                 </td>
               </tr>
             ))}

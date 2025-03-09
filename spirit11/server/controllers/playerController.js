@@ -1,5 +1,9 @@
 import playerModel from "../models/playerModel.js";
-import { computePlayerStats } from "../services/playerServices.js";
+import userModel from "../models/userModel.js";
+import {
+  computePlayerStats,
+  calPlayerPoints,
+} from "../services/playerServices.js";
 
 export const addPlayer = async (req, res) => {
   let {
@@ -119,11 +123,17 @@ export const addPlayer = async (req, res) => {
 
 export const getPlayers = async (req, res) => {
   try {
-    // Fetch players, selecting only the 'username' and 'points' fields
-    const players = await playerModel.find({}, "name playerPoints"); // Second argument specifies the fields to return
-    console.log(players);
-    // Return the players' data as JSON
-    res.json({ success: true, players });
+    const users = await userModel.find(
+      {},
+      "username playerPoints team teamPoints"
+    );
+    await Promise.all(
+      users.map(async (user) => {
+        user.teamPoints = await calPlayerPoints(user.team); // Await the calculation of team points
+      })
+    );
+    console.log(users);
+    res.json({ success: true, users });
   } catch (error) {
     console.error("Error fetching players:", error);
     res.status(500).send("Error querying players");
