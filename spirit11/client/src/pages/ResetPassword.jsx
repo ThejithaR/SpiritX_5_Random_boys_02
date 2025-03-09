@@ -93,7 +93,7 @@ const ResetPassword = () => {
         onClick={() => navigate("/")}
         src={assets.logo}
         alt=""
-        className="absolute left-5 rounded-full sm:left-20 top-5 w-15 sm:w-15 cursor-pointer"
+        className="absolute left-5 rounded-full sm:left-20 top-5 w-15 h-16 sm:w-15 h-16 cursor-pointer"
       />
 
       {!isEmailSent && (
