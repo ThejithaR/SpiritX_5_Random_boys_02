@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import PlayerCardForMyTeam from "../components/PlayerCardForBudget";
 import axios from "axios";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
+
 const TeamAndSelection = () => {
   const { backendUrl } = useContext(AppContext);
   const [view, setView] = useState("selection"); // "selection" or "team"
