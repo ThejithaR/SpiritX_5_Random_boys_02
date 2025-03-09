@@ -52,13 +52,14 @@ export const undoPurchase = async (req, res) => {
         .status(404)
         .json({ success: false, message: "User not found!" });
     }
+    const player = await playerModel.findById(playerId);
 
     const updatedUser = await userModel.findByIdAndUpdate(
       userId,
       { $pull: { team: playerId } }, // Removes `playerId` from the `team` array
       { new: true } // Returns the updated document
     );
-
+    user.budget += player.playerValue;
     if (!updatedUser) {
       return res
         .status(404)
