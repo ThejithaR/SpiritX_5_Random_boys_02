@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 import PlayerCardForMyTeam from "../components/PlayerCardForBudget";
 import PlayerCardForBudget from "../components/PlayerCardForBudget";
 import axios from "axios";
-import NavBar from "../components/Navbar.jsx";
+import Navbar from "../components/Navbar.jsx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -56,6 +56,7 @@ const TeamAndSelection = () => {
 
     fetchPlayers();
     fetchTeam();
+    fetchNoOfPlayers();
   }, [backendUrl, searchTerm]);
 
 
@@ -102,7 +103,7 @@ const TeamAndSelection = () => {
   return (
     <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">
       <Navbar />
-      <h1 className="text-3xl font-bold text-center mb-6 mt-30">
+      <h1 className="text-5xl font-bold text-center mb-6 mt-30 p-4">
         🏏 Player Selection & My Team
       </h1>
 
@@ -110,7 +111,7 @@ const TeamAndSelection = () => {
       <div className="flex justify-center space-x-4 mb-6">
         <button
           onClick={() => setView("team")}
-          className={`px-6 py-2 font-semibold rounded-md transition ${
+          className={`px-6 py-2 font-semibold rounded-full transition ${
             view === "team"
               ? "bg-blue-600 text-white"
               : "bg-gray-500 hover:bg-gray-400"
@@ -120,7 +121,7 @@ const TeamAndSelection = () => {
         </button>
         <button
           onClick={() => setView("selection")}
-          className={`px-6 py-2 font-semibold rounded-md transition ${
+          className={`px-6 py-2 font-semibold rounded-full transition ${
             view === "selection"
               ? "bg-blue-600 text-white"
               : "bg-gray-500 hover:bg-gray-400"
@@ -171,6 +172,13 @@ const TeamAndSelection = () => {
                 <div key={player._id} className="mb-2 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-4 rounded-lg shadow-lg w-full justify-content-right transform transition-all duration-300 hover:scale-101 hover:ring-4 hover:ring-gray-600">
                   <PlayerCardForBudget {...player} />
                   <div className="rounded-md flex justify-end pr-4">
+                    <button
+                      onClick={() => handleView(player)}
+                      className="w-40 mt-3 bg-white hover:bg-white-600 text-black font-bold py-2 rounded-full mr-5"
+                      >
+                      View
+                    </button>
+
                     <button
                       onClick={() => handlePurchase(player)}
                       className="bg-green-500 text-white px-4 py-2 rounded-full mt-2 flex w-40 text-center flex justify-center items-center"
