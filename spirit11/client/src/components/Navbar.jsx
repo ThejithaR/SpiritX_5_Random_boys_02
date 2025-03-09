@@ -5,6 +5,7 @@ import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import SpiritButton from "./SpiritButton.jsx";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -102,6 +103,7 @@ const NavBar = () => {
           </p>
         </div>
       )}
+      <SpiritButton />
 
       {userData ? (
         <div className="w-8 h-8 flex justify-center items-center rounded-full bg-black text-white relative group">

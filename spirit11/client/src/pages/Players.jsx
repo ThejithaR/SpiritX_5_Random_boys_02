@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import PlayerCard from "../components/PlayerCard";
 import { assets } from "../assets/assets";
 import NavBar from "../components/Navbar.jsx";
-import SpiritButton from "../components/SpiritButton.jsx";
+
 
 const Players = () => {
   const [players, setPlayers] = useState([]);
@@ -47,7 +47,7 @@ const Players = () => {
   return (
     <div className="p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 min-h-screen">
       <NavBar />
-      <SpiritButton />
+      
       {/* Plaers list + Image */}
       <div className="flex items-center justify-center  mb-6 space-x-4 mt-30">
           <h1 className="text-3xl font-bold text-gray-900">Players List</h1>
