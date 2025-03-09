@@ -27,6 +27,20 @@ Spirit11 is an exciting fantasy cricket league developed for the *Inter-Universi
 - **Database**: MongoDB
 - **Chatbot**: Flask (Python)
 
+### <u>Note !</u>
+
+**<u>To get the admins view of the spirit11 you must first sign in as a normal user and change the role of that user in the user collection in mongo Atlas server under spirit11 manually and then log in using that account.</u>**
+
+***OR***
+
+***Use the existing Admin account*** 
+
+***Username: HarshaYohan***
+
+***Password: HarshaYohan2002#***
+
+
+
 ## Installation
 
 #### <u>Prerequisites</u>

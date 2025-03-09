@@ -98,7 +98,7 @@ const Spiriter = () => {
   return (
     <div className='mt-30'>
     <Navbar/>
-    <SpiritButton/>
+    {/*<SpiritButton/>*/}
     <div style={containerStyle}>
       <h2 style={titleStyle}>Spiriter</h2>
       <div style={chatboxStyle}>

@@ -95,15 +95,15 @@ const NavBar = () => {
           >
             Leaderboard
           </p>
-          <p
+          {/* <p
             className="text-gray-800 hover:text-blue-500 cursor-pointer"
             onClick={() => navigate("/Spiriter")}
           >
             Spiriter
-          </p>
+          </p> */}
+          <SpiritButton />
         </div>
       )}
-      <SpiritButton />
 
       {userData ? (
         <div className="w-8 h-8 flex justify-center items-center rounded-full bg-black text-white relative group">
