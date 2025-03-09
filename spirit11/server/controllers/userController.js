@@ -1,4 +1,5 @@
 import userModel from "../models/userModel.js"
+import {getPlayersByIDs} from "../services/playerServices.js"
 
 export const getUserData = async(req,res)=>{
     try{
@@ -28,6 +29,13 @@ export const fetchTeam = async(req,res)=>{
         if(!user){
             return res.json({success:false,message:"User not found!"})
         }
+        const team = user.team;
+        const budget = user.budget;
+        //console.log(team);
+
+        const players = await getPlayersByIDs({playerIds:team});
+        console.log(players);
+        res.json({success:true, players, budget})
 
     }
     catch(err){
