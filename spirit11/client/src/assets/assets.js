@@ -8,6 +8,8 @@ import header_img from './header_img.png'
 import player_img from './Player.png'
 import cricket_gif from './cricket.gif'
 import batting_img from './batting.png'
+import show from './show.png'
+import hide from './hide.png'
 
 export const assets = {
     arrow_icon,
@@ -19,5 +21,7 @@ export const assets = {
     header_img,
     player_img,
     cricket_gif,
-    batting_img
+    batting_img,
+    show,
+    hide
 }
