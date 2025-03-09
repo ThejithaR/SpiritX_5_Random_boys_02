@@ -70,12 +70,9 @@ const TournamentSummary = () => {
             {playersOrderRuns.map((player, index) => (
               <div
                 key={index}
-                className={`flex flex-row justify-between items-center p-5 rounded-lg transition-all 
-                  ${
-                    index === 0
-                      ? "bg-gradient-to-r from-gray-500 to-gray-700 text-white text-xl font-extrabold shadow-lg shadow-gray-900 border-2 border-gray-400 p-6 scale-103"
-                      : "bg-gray-800 text-gray-300 font-semibold text-lg"
-                  }`}
+                className={`flex flex-row justify-between items-center p-5 rounded-lg transition-all hover:scale-105
+                  ${index === 0 ? 'bg-gradient-to-r from-gray-500 to-gray-700 text-white text-xl font-extrabold shadow-lg shadow-gray-900 border-2 border-gray-400 p-6 scale-103'
+                    : 'bg-gray-800 text-gray-300 font-semibold text-lg'}`}
               >
                 <div className="flex flex-col gap-1">
                   <p>{player.name}</p>
@@ -86,8 +83,8 @@ const TournamentSummary = () => {
             ))}
           </div>
 
-          <div className="flex flex-row justify-between items-center absolute bottom-0 left-0 right-0 bg-gray-800 text-white p-5 px-20 rounded-lg text-xl font-bold">
-            <p>Total Runs:</p>
+          <div className="flex flex-row justify-between items-center absolute bottom-0 left-0 right-0 bg-gray-800 text-white p-5 px-20 rounded-lg text-xl font-bold hover:scale-105">
+            <p >Total Runs:</p>
             <p>{totalOverallRuns}</p>
           </div>
         </div>
@@ -115,12 +112,9 @@ const TournamentSummary = () => {
             {playersOrderWickets.map((player, index) => (
               <div
                 key={index}
-                className={`flex flex-row justify-between items-center p-5 rounded-lg transition-all 
-                  ${
-                    index === 0
-                      ? "bg-gradient-to-r from-gray-500 to-gray-700 text-white text-xl font-extrabold shadow-lg shadow-gray-900 border-2 border-gray-400 p-6 scale-103"
-                      : "bg-gray-800 text-gray-300 font-semibold text-lg"
-                  }`}
+                className={`flex flex-row justify-between items-center p-5 rounded-lg transition-all hover:scale-105
+                  ${index === 0 ? 'bg-gradient-to-r from-gray-500 to-gray-700 text-white text-xl font-extrabold shadow-lg shadow-gray-900 border-2 border-gray-400 p-6 scale-103'
+                    : 'bg-gray-800 text-gray-300 font-semibold text-lg'}`}
               >
                 <div className="flex flex-col gap-1">
                   <p>{player.name}</p>
@@ -131,8 +125,8 @@ const TournamentSummary = () => {
             ))}
           </div>
 
-          <div className="flex flex-row justify-between items-center absolute bottom-0 left-0 right-0 bg-gray-800 text-white p-5 px-20 rounded-lg text-xl font-bold">
-            <p>Total Wickets:</p>
+          <div className="flex flex-row justify-between items-center absolute bottom-0 left-0 right-0 bg-gray-800 text-white p-5 px-20 rounded-lg text-xl font-bold hover:scale-105"> 
+            <p >Total Wickets:</p>
             <p>{totalOverallWickets}</p>
           </div>
         </div>
