@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AppContext } from '../context/AppContext';
 import Navbar from '../components/Navbar';
 import ReactMarkdown from 'react-markdown';
-import SpiritButton from '../components/SpiritButton';
+
 
 const Spiriter = () => {
   const [userMessage, setUserMessage] = useState('');
@@ -96,7 +96,7 @@ const Spiriter = () => {
   };
 
   return (
-    <div>
+    <div className='mt-30'>
     <Navbar/>
     <SpiritButton/>
     <div style={containerStyle}>
