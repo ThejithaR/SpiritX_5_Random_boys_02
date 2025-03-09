@@ -4,6 +4,7 @@ import PlayerCardForMyTeam from "../components/PlayerCardForBudget";
 import axios from "axios";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const TeamAndSelection = () => {
   const { backendUrl } = useContext(AppContext);
@@ -17,13 +18,17 @@ const TeamAndSelection = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        if(searchTerm === "") {
-        const response = await axios.get(backendUrl + '/api/player/get-players');
-        console.log("NO SEARCH TERM",response.data);
-        setPlayers(response.data);
-        }
-        else {
-          const response = await axios.post(backendUrl + '/api/player/searchPlayers' , searchTerm);
+        if (searchTerm === "") {
+          const response = await axios.get(
+            backendUrl + "/api/player/get-players"
+          );
+          console.log("NO SEARCH TERM", response.data);
+          setPlayers(response.data);
+        } else {
+          const response = await axios.post(
+            backendUrl + "/api/player/searchPlayers",
+            searchTerm
+          );
           setPlayers(response.data.players);
         }
       } catch (error) {
@@ -42,16 +47,20 @@ const TeamAndSelection = () => {
 
     fetchPlayers();
     fetchTeam();
-  }, [backendUrl]);
-
+  }, []);
 
   const handleUndoPurchase = async (player) => {
     const confirmUndo = window.confirm(`Undo purchase of ${player.name}?`);
     if (confirmUndo) {
       try {
-        await axios.post(`${backendUrl}/api/user/undo-purchase`, {
+        const { data } = await axios.post(`${backendUrl}/api/user/undo-purchase`, {
           playerId: player._id,
         });
+        if (data.success) {
+          toast.success(data.message);
+         window.location.reload();
+
+        }
       } catch (error) {
         console.error("Error undoing purchase:", error);
       }
@@ -60,9 +69,7 @@ const TeamAndSelection = () => {
 
   const handleView = async (player) => {
     navigate(`/player-stat/${player._id}`);
-  }
-
-
+  };
 
   return (
     <div className="min-h-screen p-6 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-white">

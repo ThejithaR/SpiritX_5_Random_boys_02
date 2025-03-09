@@ -34,30 +34,51 @@ export const fetchTeam = async (req, res) => {
     const budget = user.budget;
     //console.log(team);
 
-        const players = await getPlayersByIDs({playerIds:team});
-        console.log(players);
-        res.json({success:true, players, budget})
-
-    }
-    catch(err){
-        return res.json({success:false,message:err.message})
-    }
-}
+    const players = await getPlayersByIDs({ playerIds: team });
+    console.log(players);
+    res.json({ success: true, players, budget });
+  } catch (err) {
+    return res.json({ success: false, message: err.message });
+  }
+};
 
 export const undoPurchase = async (req, res) => {
   try {
+    console.log(req.body);
+
     const { userId, playerId } = req.body;
+
+    // Find the user
     const user = await userModel.findById(userId);
     if (!user) {
-      return res.json({ success: false, message: "User not found!" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found!" });
     }
-    const player = await userModel.team.findById(playerId);
-    if (!player) {
-      return res.json({ success: false, message: "Player not found!" });
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+      userId,
+      { $pull: { team: playerId } }, // Removes `playerId` from the `team` array
+      { new: true } // Returns the updated document
+    );
+
+    console.log(updatedUser)
+    if (!updatedUser) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found!" });
     }
-    await userModel.findOneAndDelete({ _id: playerId });
+
+    await user.save();
+
+    return res.json({
+      success: true,
+      message: "Player removed from team!",
+      team: user.team,
+    });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    console.error(error);
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
