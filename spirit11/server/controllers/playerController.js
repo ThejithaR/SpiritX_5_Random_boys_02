@@ -117,3 +117,18 @@ export const addPlayer = async (req, res) => {
     return res.json({ success: false, message: error.message });
   }
 };
+
+
+export const getPlayers = async (req, res) => {
+  
+  try {
+      const players = await playerModel.find();
+      console.log("Fetched players:", players);
+      if (!players || players.length === 0) {
+          return res.status(404).json({ success: false, message: "No players found"});
+      }
+      return res.json({ success: true, message: "Players fetched successfully", players:players });
+  } catch (error) {
+      return res.status(500).json({ success: false, message: "Server error", error: error.message});
+  }
+};
